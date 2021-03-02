@@ -40,6 +40,10 @@ class RandomBot():
             x = 0
             th = 0
         twist = Twist()
+	# linear:並進方向の速度(m/sec)
+	# angular:回転方向の速度(rad/sec)
+	# 0.1m/secで前進・・・linear:{x:0.1,y:0,z:0},angular:{x:0,y:0,z:0}
+	# 反時計回り方向に回転・・・linear:{x:0,y:0,z:0},angular:{x:0,y:0,z:0.1}
         twist.linear.x = x; twist.linear.y = 0; twist.linear.z = 0
         twist.angular.x = 0; twist.angular.y = 0; twist.angular.z = th
         return twist
@@ -53,9 +57,9 @@ class RandomBot():
         control_turn = 0
 
         while not rospy.is_shutdown():
-            twist = self.calcTwist()
+            twist = self.calcTwist()		# calculate direction
             print(twist)
-            self.vel_pub.publish(twist)
+            self.vel_pub.publish(twist)		# deploy
 
             r.sleep()
 
@@ -64,4 +68,3 @@ if __name__ == '__main__':
     rospy.init_node('random_run')
     bot = RandomBot('Random')
     bot.strategy()
-
