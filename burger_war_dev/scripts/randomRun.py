@@ -24,11 +24,8 @@ class RandomBot():
 
     def calcTwist(self):
         value = random.randint(1,1000)
-        if value < 250:
+        if value < 500:
             x = 0.2
-            th = 0
-        elif value < 500:
-            x = -0.2
             th = 0
         elif value < 750:
             x = 0
